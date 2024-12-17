@@ -128,19 +128,19 @@ def process_movie(src_file, root, file, dest_dir, actual_dir, tmdb_folder_id_ena
             log_message(f"Movie belongs to collection: {collection_name}", level="INFO")
             resolution_folder = 'Movie Collections'
             collection_folder = f"{collection_name} {{tmdb-{collection_id}}}"
-            dest_path = os.path.join(dest_dir, 'CineSync', resolution_folder ,collection_folder, movie_folder)
+            dest_path = os.path.join(dest_dir, resolution_folder ,collection_folder, movie_folder)
         else:
             if is_cinesync_layout_enabled():
-                dest_path = os.path.join(dest_dir, 'CineSync', 'Movies', movie_folder)
+                dest_path = os.path.join(dest_dir, 'Movies', movie_folder)
             else:
-                dest_path = os.path.join(dest_dir, 'CineSync', source_folder, movie_folder)
+                dest_path = os.path.join(dest_dir, source_folder, movie_folder)
     else:
         if collection_info and is_movie_collection_enabled():
             collection_name, collection_id = collection_info
             log_message(f"Movie belongs to collection: {collection_name}", level="INFO")
             resolution_folder = 'Movie Collections'
             collection_folder = f"{collection_name} {{tmdb-{collection_id}}}"
-            dest_path = os.path.join(dest_dir, 'CineSync', 'Movies', resolution_folder, collection_folder, movie_folder)
+            dest_path = os.path.join(dest_dir, 'Movies', resolution_folder, collection_folder, movie_folder)
         else:
             collection_folder = None
             if tmdb_folder_id_enabled:
@@ -180,9 +180,9 @@ def process_movie(src_file, root, file, dest_dir, actual_dir, tmdb_folder_id_ena
                 }.get(resolution.lower() if resolution else 'default_resolution', 'Movies')
 
         if collection_info:
-            dest_path = os.path.join(dest_dir, 'CineSync', 'Movies', resolution_folder, collection_folder, movie_folder)
+            dest_path = os.path.join(dest_dir, 'Movies', resolution_folder, collection_folder, movie_folder)
         else:
-            dest_path = os.path.join(dest_dir, 'CineSync', 'Movies', resolution_folder, movie_folder)
+            dest_path = os.path.join(dest_dir, 'Movies', resolution_folder, movie_folder)
 
     os.makedirs(dest_path, exist_ok=True)
 
