@@ -84,7 +84,7 @@ def process_show(src_file, root, file, dest_dir, actual_dir, tmdb_folder_id_enab
                 episode_identifier = f"S{season_number}E{episode_identifier.split('x')[1]}"
                 create_season_folder = True
             elif re.match(r'S\d{2}[0-9]+', episode_identifier):
-                show_name = episode_match.group(1).replace('.', ' ').strip()
+                show_name = episode_match.group(1).replace('.', ' '). strip()
                 episode_identifier = f"S{episode_identifier[1:3]}E{episode_identifier[3:]}"
                 create_season_folder = True
             elif re.match(r'[0-9]+e[0-9]+', episode_identifier):
@@ -201,14 +201,14 @@ def process_show(src_file, root, file, dest_dir, actual_dir, tmdb_folder_id_enab
 
     # Destination path determination
     if is_cinesync_layout_enabled():
-        base_dest_path = os.path.join(dest_dir, 'CineSync', 'Shows', show_folder)
-        extras_base_dest_path = os.path.join(dest_dir, 'CineSync', 'Shows', show_folder)
+        base_dest_path = os.path.join(dest_dir, 'Shows', show_folder)
+        extras_base_dest_path = os.path.join(dest_dir, 'Shows', show_folder)
     elif is_source_structure_enabled():
-        base_dest_path = os.path.join(dest_dir, 'CineSync', source_folder, show_folder)
-        extras_base_dest_path = os.path.join(dest_dir, 'CineSync', source_folder, show_folder)
+        base_dest_path = os.path.join(dest_dir, source_folder, show_folder)
+        extras_base_dest_path = os.path.join(dest_dir, source_folder, show_folder)
     else:
-        base_dest_path = os.path.join(dest_dir, 'CineSync', 'Shows', resolution_folder, show_folder)
-        extras_base_dest_path = os.path.join(dest_dir, 'CineSync', 'Shows', 'Extras', show_folder)
+        base_dest_path = os.path.join(dest_dir, 'Shows', resolution_folder, show_folder)
+        extras_base_dest_path = os.path.join(dest_dir, 'Shows', 'Extras', show_folder)
 
     # Use anime season number if available, otherwise use the default season handling
     if anime_result:
@@ -221,7 +221,7 @@ def process_show(src_file, root, file, dest_dir, actual_dir, tmdb_folder_id_enab
     # Function to check if show folder exists in any resolution folder
     def find_show_folder_in_resolution_folders():
         for res_folder in ['UltraHD', 'FullHD', 'SDClassics', 'Retro480p', 'RetroDVD', 'Shows']:
-            show_folder_path = os.path.join(dest_dir, 'CineSync', 'Shows', res_folder, show_folder)
+            show_folder_path = os.path.join(dest_dir, 'Shows', res_folder, show_folder)
             if os.path.isdir(show_folder_path):
                 return show_folder_path
         return None
